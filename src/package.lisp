@@ -1,0 +1,2 @@
+(defpackage #:blackjack
+  (:use #:cl))

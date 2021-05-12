@@ -1,0 +1,61 @@
+name: CI
+
+# Trigger the workflow on push, pull request or workflow_dispatch
+on: [push, pull_request, workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+# This workflow contains a single job called "test"
+  test:
+  # We'll use a build matrix to test our code in different OS using different Common Lisp implementations
+    name: ${{ matrix.lisp }} on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        lisp: [sbcl-bin, ccl-bin]
+        os: [ubuntu-16.04]
+
+    # run the job on every combination of "lisp" and "os" above
+    runs-on: ${{ matrix.os }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Cache the .roswell directory if possible, to save time if we run tests frequently
+      - name: Cache the .roswell directory if possible
+        id: cache-dot-roswell
+        uses: actions/cache@v2
+        with:
+          path: ~/.roswell
+          key: ${{ runner.os }}-dot-roswell-${{ matrix.lisp }}-${{ hashFiles('**/*.asd') }}
+          restore-keys: |
+            ${{ runner.os }}-dot-roswell-${{ matrix.lisp }}-
+            ${{ runner.os }}-dot-roswell-
+            
+      # Install Roswell
+      - name: Install Roswell
+        shell: bash
+        env:
+          LISP: ${{ matrix.lisp }}
+        run: curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
+
+      # Update any existing QuickLisp distribution stored in the cached roswell
+      - name: Update any existing QuickLisp distribution
+        shell: bash
+        run: ros -e '(ql:update-all-dists :prompt nil)'
+
+      # Run the tests
+      - name: Run the tests
+        shell: bash
+        run: ros -s fiveam
+                 -e '(setf fiveam:*on-error* :debug
+                           fiveam:*on-failure* :debug)'
+                 -e '(setf *debugger-hook*
+                           (lambda (c h)
+                             (declare (ignore c h))
+                             (uiop:quit -1)))'
+                 -e '(ql:quickload :blackjack/tests)'
+                 -e '(asdf:test-system :blackjack)'
