@@ -18,3 +18,7 @@
   (let ((hand '(2 9))
         (points 11))    
     (fiveam:is (= points (get-points hand)))))
+
+(fiveam:test test-hit
+  (let ((deck '(1 3 5 7 9)))
+    (fiveam:is (member (hit deck) deck))))
