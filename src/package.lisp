@@ -1,2 +1,3 @@
 (defpackage #:blackjack
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:get-points))

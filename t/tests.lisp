@@ -14,6 +14,7 @@
 (defun run-tests ()
   (fiveam:run! 'all-tests))
 
-(fiveam:test test-ci-build
-  "Test the Continuous Integration build to see if it works correctly."
-  (fiveam:is-true t))
+(fiveam:test test-get-points
+  (let ((hand '(2 9))
+        (points 11))    
+    (fiveam:is (= points (get-points hand)))))
