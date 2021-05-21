@@ -1,14 +1,14 @@
 (in-package #:blackjack)
 
-(defparameter *deck*
+(defparameter *cards*
   '(1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10)
   "List of cards in a deck.
 For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depending of the hand).")
 
-(defun create-n-deck (deck number-of-decks)
-  "Create a n-deck that is unshuffled."
+(defun create-deck (&optional (number-of-decks 1))
+  "Create a deck which cards are already shuffled."
   (alexandria:flatten (loop :repeat number-of-decks
-                            :collect deck)))
+                            :collect (shuffle *cards*))))
 (defun shuffle (deck)
   "Shuffle a deck."
   (alexandria:shuffle deck))
@@ -18,11 +18,11 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defun remove-nth (n list)
   (declare
-    (type (integer 0) n)
-    (type list list))
+   (type (integer 0) n)
+   (type list list))
   (if (or (zerop n) (null list))
-    (cdr list)
-    (cons (car list) (remove-nth (1- n) (cdr list)))))
+      (cdr list)
+      (cons (car list) (remove-nth (1- n) (cdr list)))))
 
 (defun hit (deck)
   "Get a card from the deck.
