@@ -9,6 +9,9 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   "Create a n-deck that is unshuffled."
   (alexandria:flatten (loop :repeat number-of-decks
                             :collect deck)))
+(defun shuffle (deck)
+  "Shuffle a deck."
+  (alexandria:shuffle deck))
 
 (defun get-points (hand)
   (reduce #'+ hand))
