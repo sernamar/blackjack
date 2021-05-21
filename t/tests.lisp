@@ -21,4 +21,4 @@
 
 (fiveam:test test-hit
   (let ((deck '(1 3 5 7 9)))
-    (fiveam:is (member (hit deck) deck))))
+    (fiveam:is (= 1 (hit deck)))))
