@@ -1,5 +1,15 @@
 (in-package #:blackjack)
 
+(defparameter *deck*
+  '(1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10)
+  "List of cards in a deck.
+For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depending of the hand).")
+
+(defun create-n-deck (deck number-of-decks)
+  "Create a n-deck that is unshuffled."
+  (alexandria:flatten (loop :repeat number-of-decks
+                            :collect deck)))
+
 (defun get-points (hand)
   (reduce #'+ hand))
 

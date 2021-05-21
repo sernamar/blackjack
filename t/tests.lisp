@@ -22,3 +22,9 @@
 (fiveam:test test-hit
   (let ((deck '(1 3 5 7 9)))
     (fiveam:is (member (hit deck) deck))))
+
+(fiveam:test test-create-n-deck
+  (let ((deck '(1 2 3))
+        (two-deck '(1 2 3 1 2 3)))
+    (fiveam:is (equal two-deck
+                      (create-n-deck deck 2)))))

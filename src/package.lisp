@@ -1,4 +1,5 @@
 (defpackage #:blackjack
   (:use #:cl)
   (:export #:get-points
-           #:hit))
+           #:hit
+           #:create-n-deck))

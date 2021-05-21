@@ -3,6 +3,7 @@
   :author "Sergio Navarro <sernamar@pm.me>"
   :license  "MIT"
   :version "0.0.1"
+  :depends-on (#:alexandria)
   :pathname "src"
   :serial t
   :components ((:file "package")
