@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lisp: [sbcl-bin, ccl-bin]
+        lisp: [sbcl-bin]
         os: [ubuntu-latest]
 
     # run the job on every combination of "lisp" and "os" above
