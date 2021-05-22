@@ -16,10 +16,6 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 (defun get-points (hand)
   (reduce #'+ hand))
 
-(defun hit (deck)
-  "Get the first card from the deck."
-  (pop deck))
-
 (defclass player ()
   ((hand :initarg :hand
          :initform nil
@@ -27,3 +23,6 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defun create-player (&key hand)
   (make-instance 'player :hand hand))
+
+(defmethod hit ((player player) deck)
+  (setf (hand player) (nconc (hand player) (list (pop deck)))))
