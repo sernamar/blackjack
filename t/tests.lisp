@@ -23,6 +23,12 @@
     (fiveam:is (= number-of-cards (length (cards 1-deck))))
     (fiveam:is (= (* 6 number-of-cards) (length (cards 6-deck))))))
 
+(fiveam:test test-shuffle
+  (let* ((deck (create-deck))
+         (shuffled-cards (shuffle deck)))
+    (fiveam:is (= (length (cards deck))
+                  (length shuffled-cards)))))
+
 ;; Tests for the PLAYER class ;;
 
 (fiveam:test test-player

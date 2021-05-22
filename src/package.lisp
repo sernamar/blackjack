@@ -6,4 +6,5 @@
            #:create-player
            #:hand
            #:*52-cards-deck*
-           #:cards))
+           #:cards
+           #:shuffle))
