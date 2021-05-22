@@ -54,3 +54,13 @@
     (fiveam:is (= expected (hit player deck)))
     (fiveam:is (equal expected-hand (hand player)))))
 
+;; Tests for the GAME class ;;
+
+(fiveam:test test-game
+  (let* ((number-of-players 3)
+         (number-of-decks 1)
+         (game (make-game number-of-players number-of-decks)))
+    (fiveam:is (= number-of-players
+                  (length (players game))))
+    (fiveam:is (= (* 52 number-of-decks)
+                  (length (cards (deck game)))))))

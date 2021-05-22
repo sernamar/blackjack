@@ -8,4 +8,8 @@
            #:make-player
            #:hand
            #:hit
-           #:get-points))
+           #:get-points
+           ;; game class
+           #:make-game
+           #:players
+           #:deck))
