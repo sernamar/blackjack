@@ -9,6 +9,7 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   "Create a deck which cards are already shuffled."
   (shuffle (alexandria:flatten (loop :repeat number-of-decks
                                      :collect *52-cards-deck*))))
+
 (defun shuffle (deck)
   "Shuffle a deck."
   (alexandria:shuffle deck))
@@ -22,7 +23,9 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   (make-instance 'player :hand hand))
 
 (defmethod hit ((player player) deck)
-  (setf (hand player) (nconc (hand player) (list (pop deck)))))
+  (let ((card (pop deck)))
+    (setf (hand player) (nconc (hand player) (list card)))
+    card))
 
 (defmethod get-points ((player player))
   (reduce #'+ (hand player)))
