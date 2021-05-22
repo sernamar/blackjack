@@ -37,9 +37,9 @@
          (hand '(1 2 3))
          (player-2 (make-player hand)))
     (fiveam:is (equal empty-hand
-                  (hand player-1)))
+                      (hand player-1)))
     (fiveam:is (equal hand
-                  (hand player-2)))))
+                      (hand player-2)))))
 
 (fiveam:test test-get-points
   (let ((player (make-player '(2 9)))
@@ -48,9 +48,10 @@
 
 (fiveam:test test-hit
   (let ((player (make-player))
-        (deck '(1 3 5 7 9))
+        (deck (make-deck))
         (expected 1)
         (expected-hand '(1)))
+    (setf (cards deck) '(1 3 5 7)) ; set the cards slot of deck for tests purposes
     (fiveam:is (= expected (hit player deck)))
     (fiveam:is (equal expected-hand (hand player)))))
 
