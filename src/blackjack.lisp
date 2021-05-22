@@ -1,6 +1,6 @@
 (in-package #:blackjack)
 
-(defparameter *cards*
+(defparameter *52-cards-deck*
   '(1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10)
   "List of cards in a deck.
 For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depending of the hand).")
@@ -8,7 +8,7 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 (defun create-deck (&optional (number-of-decks 1))
   "Create a deck which cards are already shuffled."
   (alexandria:flatten (loop :repeat number-of-decks
-                            :collect (shuffle *cards*))))
+                            :collect (shuffle *52-cards-deck*))))
 (defun shuffle (deck)
   "Shuffle a deck."
   (alexandria:shuffle deck))
