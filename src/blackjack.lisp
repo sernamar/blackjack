@@ -13,9 +13,6 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   "Shuffle a deck."
   (alexandria:shuffle deck))
 
-(defun get-points (hand)
-  (reduce #'+ hand))
-
 (defclass player ()
   ((hand :initarg :hand
          :initform nil
@@ -26,3 +23,6 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defmethod hit ((player player) deck)
   (setf (hand player) (nconc (hand player) (list (pop deck)))))
+
+(defmethod get-points ((player player))
+  (reduce #'+ (hand player)))
