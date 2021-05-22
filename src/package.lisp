@@ -2,4 +2,6 @@
   (:use #:cl)
   (:export #:get-points
            #:hit
-           #:create-n-deck))
+           #:create-deck
+           #:create-player
+           #:hand))

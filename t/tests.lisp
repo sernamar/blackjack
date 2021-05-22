@@ -22,3 +22,13 @@
 (fiveam:test test-hit
   (let ((deck '(1 3 5 7 9)))
     (fiveam:is (= 1 (hit deck)))))
+
+(fiveam:test test-player
+  (let* ((empty-hand nil)
+         (player-1 (create-player))
+         (hand '(1 2 3))
+         (player-2 (create-player :hand hand)))
+    (fiveam:is (equal empty-hand
+                  (hand player-1)))
+    (fiveam:is (equal hand
+                  (hand player-2)))))

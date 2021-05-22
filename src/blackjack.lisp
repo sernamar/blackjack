@@ -19,3 +19,11 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 (defun hit (deck)
   "Get the first card from the deck."
   (pop deck))
+
+(defclass player ()
+  ((hand :initarg :hand
+         :initform nil
+         :accessor hand)))
+
+(defun create-player (&key hand)
+  (make-instance 'player :hand hand))
