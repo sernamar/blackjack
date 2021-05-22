@@ -1,10 +1,11 @@
 (defpackage #:blackjack
   (:use #:cl)
-  (:export #:get-points
-           #:hit
+  (:export ;; deck class
            #:create-deck
+           #:cards
+           #:shuffle
+           ;; player class
            #:create-player
            #:hand
-           #:*52-cards-deck*
-           #:cards
-           #:shuffle))
+           #:hit
+           #:get-points))
