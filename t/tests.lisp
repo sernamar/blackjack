@@ -18,8 +18,10 @@
 
 (fiveam:test test-deck
   (let ((number-of-cards 52)
-        (deck (create-deck)))
-    (fiveam:is (= number-of-cards (length (cards deck))))))
+        (1-deck (create-deck))
+        (6-deck (create-deck 6)))
+    (fiveam:is (= number-of-cards (length (cards 1-deck))))
+    (fiveam:is (= (* 6 number-of-cards) (length (cards 6-deck))))))
 
 ;; Tests for the PLAYER class ;;
 
