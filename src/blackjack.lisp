@@ -18,7 +18,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defmethod shuffle ((deck deck))
   "Shuffle a deck."
-  (setf (cards deck) (alexandria:shuffle (cards deck))))
+  (setf (cards deck) (alexandria:shuffle (cards deck)))
+  deck)
 
 (defclass player ()
   ((hand :initarg :hand

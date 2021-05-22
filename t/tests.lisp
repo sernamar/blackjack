@@ -25,9 +25,9 @@
 
 (fiveam:test test-shuffle
   (let* ((deck (make-deck))
-         (shuffled-cards (shuffle deck)))
+         (shuffled-deck (shuffle deck)))
     (fiveam:is (= (length (cards deck))
-                  (length shuffled-cards)))))
+                  (length (cards shuffled-deck))))))
 
 ;; Tests for the PLAYER class ;;
 
