@@ -18,13 +18,13 @@
 
 (fiveam:test test-deck
   (let ((number-of-cards 52)
-        (1-deck (create-deck))
-        (6-deck (create-deck 6)))
+        (1-deck (make-deck))
+        (6-deck (make-deck 6)))
     (fiveam:is (= number-of-cards (length (cards 1-deck))))
     (fiveam:is (= (* 6 number-of-cards) (length (cards 6-deck))))))
 
 (fiveam:test test-shuffle
-  (let* ((deck (create-deck))
+  (let* ((deck (make-deck))
          (shuffled-cards (shuffle deck)))
     (fiveam:is (= (length (cards deck))
                   (length shuffled-cards)))))
@@ -33,21 +33,21 @@
 
 (fiveam:test test-player
   (let* ((empty-hand nil)
-         (player-1 (create-player))
+         (player-1 (make-player))
          (hand '(1 2 3))
-         (player-2 (create-player :hand hand)))
+         (player-2 (make-player :hand hand)))
     (fiveam:is (equal empty-hand
                   (hand player-1)))
     (fiveam:is (equal hand
                   (hand player-2)))))
 
 (fiveam:test test-get-points
-  (let ((player (create-player :hand '(2 9)))
+  (let ((player (make-player :hand '(2 9)))
         (expected 11))    
     (fiveam:is (= expected (get-points player)))))
 
 (fiveam:test test-hit
-  (let ((player (create-player))
+  (let ((player (make-player))
         (deck '(1 3 5 7 9))
         (expected 1)
         (expected-hand '(1)))

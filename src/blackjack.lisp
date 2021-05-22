@@ -10,8 +10,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
           :initform nil
           :accessor cards)))
 
-(defun create-deck (&optional (number-of-decks 1))
-  "Create a deck which cards are already shuffled."
+(defun make-deck (&optional (number-of-decks 1))
+  "Make a deck which cards are already shuffled."
   (make-instance 'deck :cards (alexandria:shuffle
                                (alexandria:flatten (loop :repeat number-of-decks
                                                          :collect *52-cards-deck*)))))
@@ -25,7 +25,7 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
          :initform nil
          :accessor hand)))
 
-(defun create-player (&key hand)
+(defun make-player (&key hand)
   (make-instance 'player :hand hand))
 
 (defmethod hit ((player player) deck)
@@ -46,5 +46,5 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defun make-game (number-of-players &optional (number-of-decks 1))
   (make-instance 'game :players (loop :repeat number-of-players
-                                      :collect (create-player))
-                 :deck (create-deck number-of-decks)))
+                                      :collect (make-player))
+                 :deck (make-deck number-of-decks)))
