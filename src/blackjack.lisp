@@ -25,7 +25,7 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
          :initform nil
          :accessor hand)))
 
-(defun make-player (&key hand)
+(defun make-player (&optional hand)
   (make-instance 'player :hand hand))
 
 (defmethod hit ((player player) deck)

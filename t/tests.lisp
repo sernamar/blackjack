@@ -35,14 +35,14 @@
   (let* ((empty-hand nil)
          (player-1 (make-player))
          (hand '(1 2 3))
-         (player-2 (make-player :hand hand)))
+         (player-2 (make-player hand)))
     (fiveam:is (equal empty-hand
                   (hand player-1)))
     (fiveam:is (equal hand
                   (hand player-2)))))
 
 (fiveam:test test-get-points
-  (let ((player (make-player :hand '(2 9)))
+  (let ((player (make-player '(2 9)))
         (expected 11))    
     (fiveam:is (= expected (get-points player)))))
 
