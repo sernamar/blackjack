@@ -6,10 +6,10 @@ Blackjack, also known as *veintiuno* (or *veintiuna*, as first mentioned by Cerv
 
 1. Load the systems' definitions:
 ```lisp
-(load "ci-play.asd")
+(load "blackjack.asd")
 ```
 
 2. Run the tests:
 ```lisp
-(asdf:test-system :ci-play)
+(asdf:test-system :blackjack)
 ```
