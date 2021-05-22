@@ -35,3 +35,16 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defmethod get-points ((player player))
   (reduce #'+ (hand player)))
+
+(defclass game ()
+  ((players :initarg :players
+            :initform nil
+            :accessor players)
+   (deck :initarg :deck
+         :initform nil
+         :accessor deck)))
+
+(defun make-game (number-of-players &optional (number-of-decks 1))
+  (make-instance 'game :players (loop :repeat number-of-players
+                                      :collect (create-player))
+                 :deck (create-deck number-of-decks)))
