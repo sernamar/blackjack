@@ -46,6 +46,7 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
          :accessor deck)))
 
 (defun make-game (number-of-players &optional (number-of-decks 1))
-  (make-instance 'game :players (loop :repeat number-of-players
-                                      :collect (make-player))
+  (make-instance 'game
+                 :players (loop :repeat number-of-players
+                                :collect (make-player))
                  :deck (make-deck number-of-decks)))
