@@ -14,6 +14,13 @@
 (defun run-tests ()
   (fiveam:run! 'all-tests))
 
+;; Tests for the DECK class ;;
+
+(fiveam:test test-deck
+  (let ((number-of-cards 52)
+        (deck (create-deck)))
+    (fiveam:is (= number-of-cards (length (cards deck))))))
+
 ;; Tests for the PLAYER class ;;
 
 (fiveam:test test-player

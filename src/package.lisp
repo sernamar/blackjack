@@ -4,4 +4,6 @@
            #:hit
            #:create-deck
            #:create-player
-           #:hand))
+           #:hand
+           #:*52-cards-deck*
+           #:cards))
