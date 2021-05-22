@@ -5,6 +5,11 @@
   "List of cards in a deck.
 For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depending of the hand).")
 
+(defclass deck ()
+  ((cards :initarg :cards
+          :initform nil
+          :accessor cards)))
+
 (defun create-deck (&optional (number-of-decks 1))
   "Create a deck which cards are already shuffled."
   (shuffle (alexandria:flatten (loop :repeat number-of-decks
