@@ -15,9 +15,9 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   (shuffle (alexandria:flatten (loop :repeat number-of-decks
                                      :collect *52-cards-deck*))))
 
-(defun shuffle (deck)
+(defmethod shuffle ((deck deck))
   "Shuffle a deck."
-  (alexandria:shuffle deck))
+  (setf (cards deck) (alexandria:shuffle (cards deck))))
 
 (defclass player ()
   ((hand :initarg :hand
