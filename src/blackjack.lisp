@@ -7,8 +7,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defun create-deck (&optional (number-of-decks 1))
   "Create a deck which cards are already shuffled."
-  (alexandria:flatten (loop :repeat number-of-decks
-                            :collect (shuffle *52-cards-deck*))))
+  (shuffle (alexandria:flatten (loop :repeat number-of-decks
+                                     :collect *52-cards-deck*))))
 (defun shuffle (deck)
   "Shuffle a deck."
   (alexandria:shuffle deck))
