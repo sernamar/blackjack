@@ -14,6 +14,18 @@
 (defun run-tests ()
   (fiveam:run! 'all-tests))
 
+;; Tests for the PLAYER class ;;
+
+(fiveam:test test-player
+  (let* ((empty-hand nil)
+         (player-1 (create-player))
+         (hand '(1 2 3))
+         (player-2 (create-player :hand hand)))
+    (fiveam:is (equal empty-hand
+                  (hand player-1)))
+    (fiveam:is (equal hand
+                  (hand player-2)))))
+
 (fiveam:test test-get-points
   (let ((player (create-player :hand '(2 9)))
         (expected 11))    
@@ -27,12 +39,3 @@
     (fiveam:is (= expected (hit player deck)))
     (fiveam:is (equal expected-hand (hand player)))))
 
-(fiveam:test test-player
-  (let* ((empty-hand nil)
-         (player-1 (create-player))
-         (hand '(1 2 3))
-         (player-2 (create-player :hand hand)))
-    (fiveam:is (equal empty-hand
-                  (hand player-1)))
-    (fiveam:is (equal hand
-                  (hand player-2)))))
