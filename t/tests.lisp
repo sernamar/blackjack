@@ -15,13 +15,17 @@
   (fiveam:run! 'all-tests))
 
 (fiveam:test test-get-points
-  (let ((hand '(2 9))
-        (points 11))    
-    (fiveam:is (= points (get-points hand)))))
+  (let ((player (create-player :hand '(2 9)))
+        (expected 11))    
+    (fiveam:is (= expected (get-points player)))))
 
 (fiveam:test test-hit
-  (let ((deck '(1 3 5 7 9)))
-    (fiveam:is (= 1 (hit deck)))))
+  (let ((player (create-player))
+        (deck '(1 3 5 7 9))
+        (expected 1)
+        (expected-hand '(1)))
+    (fiveam:is (= expected (hit player deck)))
+    (fiveam:is (equal expected-hand (hand player)))))
 
 (fiveam:test test-player
   (let* ((empty-hand nil)
