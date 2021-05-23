@@ -38,10 +38,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 (defmethod hit ((player player) (deck deck))
   (let ((card (pop (cards deck))))
     (setf (hand player) (nconc (hand player) (list card)))
+    (setf (points player) (reduce #'+ (hand player)))
     card))
-
-(defmethod get-points ((player player))
-  (reduce #'+ (hand player)))
 
 (defclass game ()
   ((players :initarg :players

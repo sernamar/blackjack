@@ -51,27 +51,36 @@
     (fiveam:is (= points
                   (points player-2)))))
 
-(fiveam:test test-get-points
-  (let ((player (make-player "Mike" '(2 9)))
-        (expected 11))    
-    (fiveam:is (= expected (get-points player)))))
-
 (fiveam:test test-hit
   (let ((player (make-player "Mike"))
         (deck (make-deck))
+        (cards '(1 3 5 7))
         (expected 1)
         (expected-hand '(1)))
-    (setf (cards deck) '(1 3 5 7)) ; set the cards slot of deck for tests purposes
+    (setf (cards deck) cards) ; set the cards slot of deck for tests purposes
     (fiveam:is (= expected (hit player deck)))
     (fiveam:is (equal expected-hand (hand player)))))
+
+(fiveam:test test-points-after-hits
+  (let ((player (make-player "Mike"))
+        (deck (make-deck))
+        (cards '(1 3 5 7))
+        (expected-after-1-hit 1)
+        (expected-after-2-hits 4))
+    (setf (cards deck) cards) ; set the cards slot of deck for tests purposes
+    (hit player deck)
+    (fiveam:is (= expected-after-1-hit (points player)))
+    (hit player deck)
+    (fiveam:is (= expected-after-2-hits (points player)))))
 
 ;; Tests for the GAME class ;;
 
 (fiveam:test test-game
   (let* ((number-of-players 3)
+         (number-of-cards-per-deck 52)
          (number-of-decks 1)
          (game (make-game number-of-players number-of-decks)))
     (fiveam:is (= number-of-players
                   (length (players game))))
-    (fiveam:is (= (* 52 number-of-decks)
+    (fiveam:is (= (* number-of-cards-per-deck number-of-decks)
                   (length (cards (deck game)))))))
