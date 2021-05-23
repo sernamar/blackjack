@@ -55,10 +55,6 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   "Deal the first hand (2 cards to each player)."
   (let ((players (players game))
         (deck (deck game)))
-    (format t "Cards in the deck: ~a~%" (cards deck))
     (dotimes (x 2)
       (dolist (player players)
-        (hit player deck)))
-    ;; print players hand
-    (dolist (player players)
-      (format t "~a~%" (hand player)))))
+        (hit player deck)))))
