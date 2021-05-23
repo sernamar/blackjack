@@ -51,8 +51,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
                                 :collect (make-player))
                  :deck (make-deck number-of-decks)))
 
-(defmethod deal-first-2-cards ((game game))
-  "Deal 2 cards to each player."
+(defmethod deal-first-hand ((game game))
+  "Deal the first hand (2 cards to each player)."
   (let ((players (players game))
         (deck (deck game)))
     (format t "Cards in the deck: ~a~%" (cards deck))
