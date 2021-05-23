@@ -64,14 +64,17 @@
 (fiveam:test test-points-after-hits
   (let ((player (make-player "Mike"))
         (deck (make-deck))
-        (cards '(1 3 5 7))
-        (expected-after-1-hit 1)
-        (expected-after-2-hits 4))
+        (cards '(1 5 7))
+        (expected-after-1-hit 11)
+        (expected-after-2-hits 16)
+        (expected-after-3-hits 13))
     (setf (cards deck) cards) ; set the cards slot of deck for tests purposes
     (hit player deck)
     (fiveam:is (= expected-after-1-hit (points player)))
     (hit player deck)
-    (fiveam:is (= expected-after-2-hits (points player)))))
+    (fiveam:is (= expected-after-2-hits (points player)))
+    (hit player deck)
+    (fiveam:is (= expected-after-3-hits (points player)))))
 
 ;; Tests for the GAME class ;;
 

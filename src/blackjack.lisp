@@ -38,8 +38,15 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 (defmethod hit ((player player) (deck deck))
   (let ((card (pop (cards deck))))
     (setf (hand player) (nconc (hand player) (list card)))
-    (setf (points player) (reduce #'+ (hand player)))
+    (setf (points player) (choose-best-score (hand player)))
     card))
+
+(defun choose-best-score (hand)
+  "If it is an Ace in the hand, choose its value (1 or 11) to get the best score (closest to 21)."
+  (let ((sum (reduce #'+ hand)))
+    (if (and (member 1 hand) (< sum 12))
+        (+ 10 sum)
+        sum)))
 
 (defclass game ()
   ((players :initarg :players
