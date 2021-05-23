@@ -1,17 +1,17 @@
 (defpackage #:blackjack
   (:use #:cl)
   (:export ;; deck class
-           #:make-deck
            #:cards
+           #:make-deck
            #:shuffle
            ;; player class
-           #:make-player
            #:name
            #:hand
            #:points
+           #:make-player
            #:hit
-           #:get-points
            ;; game class
-           #:make-game
            #:players
-           #:deck))
+           #:deck
+           #:make-game
+           #:deal-first-hand))
