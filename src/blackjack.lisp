@@ -22,12 +22,18 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
   deck)
 
 (defclass player ()
-  ((hand :initarg :hand
+  ((name :initarg :name
          :initform nil
-         :accessor hand)))
+         :accessor name)
+   (hand :initarg :hand
+         :initform nil
+         :accessor hand)
+   (points :initarg :points
+           :initform 0
+           :accessor points)))
 
-(defun make-player (&optional hand)
-  (make-instance 'player :hand hand))
+(defun make-player (name &optional hand (points 0))
+  (make-instance 'player :name name :hand hand :points points))
 
 (defmethod hit ((player player) (deck deck))
   (let ((card (pop (cards deck))))
@@ -47,8 +53,8 @@ For now, I will consider that the value of Aces is 1 (it could be 1 or 11, depen
 
 (defun make-game (number-of-players &optional (number-of-decks 1))
   (make-instance 'game
-                 :players (loop :repeat number-of-players
-                                :collect (make-player))
+                 :players (loop :for x :from 1 :to number-of-players
+                                :collect (make-player (format nil "player-~a" x)))
                  :deck (make-deck number-of-decks)))
 
 (defmethod deal-first-hand ((game game))

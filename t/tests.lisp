@@ -32,22 +32,32 @@
 ;; Tests for the PLAYER class ;;
 
 (fiveam:test test-player
-  (let* ((empty-hand nil)
-         (player-1 (make-player))
+  (let* ((name "Mike")
+         (empty-hand nil)
+         (player-1 (make-player name))
          (hand '(1 2 3))
-         (player-2 (make-player hand)))
+         (points 6)
+         (player-2 (make-player name hand points)))
+    (fiveam:is (equal name
+                      (name player-1)))
     (fiveam:is (equal empty-hand
                       (hand player-1)))
+    (fiveam:is (= 0
+                  (points player-1)))
+    (fiveam:is (equal name
+                      (name player-2)))
     (fiveam:is (equal hand
-                      (hand player-2)))))
+                      (hand player-2)))
+    (fiveam:is (= points
+                  (points player-2)))))
 
 (fiveam:test test-get-points
-  (let ((player (make-player '(2 9)))
+  (let ((player (make-player "Mike" '(2 9)))
         (expected 11))    
     (fiveam:is (= expected (get-points player)))))
 
 (fiveam:test test-hit
-  (let ((player (make-player))
+  (let ((player (make-player "Mike"))
         (deck (make-deck))
         (expected 1)
         (expected-hand '(1)))

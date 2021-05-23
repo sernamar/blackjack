@@ -6,7 +6,9 @@
            #:shuffle
            ;; player class
            #:make-player
+           #:name
            #:hand
+           #:points
            #:hit
            #:get-points
            ;; game class
