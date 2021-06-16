@@ -1,7 +1,7 @@
 (in-package #:blackjack)
 
 (defparameter *52-cards-deck*
-  '(1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10)
+  '(11 11 11 11 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10)
   "List of cards in a deck.")
 
 (defclass deck ()
@@ -43,8 +43,8 @@
 (defun choose-best-score (hand)
   "If it is an Ace in the hand, choose its value (1 or 11) to get the best score (closest to 21)."
   (let ((sum (reduce #'+ hand)))
-    (if (and (member 1 hand) (< sum 12))
-        (+ 10 sum)
+    (if (and (member 11 hand) (> sum 21))
+        (- sum 10)
         sum)))
 
 (defclass game ()
