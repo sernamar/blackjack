@@ -48,6 +48,14 @@
     (setf (points player) (choose-best-score (hand player)))
     card))
 
+(defmethod stand ((player player))
+  "Decide if a player should stand or hit again.
+
+For now, just based on his score. But we should also considering the dealer's first card (that's the one that players can see) to decide if a player should stand or hit again."
+  (if (<= 17 (choose-best-score (hand player)))
+      t
+      nil))
+
 (defun choose-best-score (hand)
   "If it is an Ace in the hand, choose its value (1 or 11) to get the best score (closest to 21)."
   (let ((sum (reduce #'+ hand)))
