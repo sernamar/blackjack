@@ -119,6 +119,14 @@ For now, the only strategies are:
                   (hit player deck)
                   (format t "~a asks for a card, and now he has: ~d points~%" (name player) (points player)))))))
 
+(defmethod print-winners ((game game))
+  (let ((players (players game))
+        (dealer-score (points (dealer game))))
+    (mapcar (lambda (player)
+              (unless (or (bust player) (<= (points player) dealer-score))
+                (format t "~a wins!~%" (name player))))
+            players)))
+
 ;;; ----------- ;;;
 ;;;   Example   ;;;
 ;;; ----------- ;;;
@@ -140,4 +148,7 @@ For now, the only strategies are:
     (deal-next-hands game)
     (format t "~%Final scores:~%")
     (format t "~%Dealer's score: ~a~%" (points dealer))
-    (print-players-scores players)))
+    (print-players-scores players)
+
+    (format t "~%List of winners:~%")
+    (print-winners game)))
