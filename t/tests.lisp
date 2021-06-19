@@ -96,6 +96,12 @@
     (hit player deck)
     (fiveam:is (= expected-after-3-hits (points player)))))
 
+(fiveam:test test-bust
+  (let ((player-1 (make-player "player-1" '(5 6 10) 21))
+        (player-2 (make-player "player-2" '(6 6 10) 22)))
+    (fiveam:is-false (bust player-1))
+    (fiveam:is-true (bust player-2))))
+
 ;; Tests for the GAME class ;;
 
 (fiveam:test test-game

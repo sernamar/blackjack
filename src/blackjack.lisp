@@ -66,9 +66,14 @@ For now, the only strategies are:
         (- sum 10)
         sum)))
 
+(defmethod bust ((player player))
+  (< 21 (points player)))
+
 (defun print-players-scores (players)
   (mapcar (lambda (player)
-              (format t "~a: ~d points~%" (name player) (points player)))
+            (if (< 21 (points player))
+                (format t "~a did bust!~%" (name player))
+                (format t "~a: ~d points~%" (name player) (points player))))
             players))
 
 ;;; -------- ;;;
@@ -109,7 +114,7 @@ For now, the only strategies are:
          (dealer-face-up-card (first (hand dealer)))
          (deck (deck game)))
     (dolist (player players)
-      (loop :while (not (stand player dealer-face-up-card))
+      (loop :while (and (not (bust player)) (not (stand player dealer-face-up-card)))
             :do (progn
                   (hit player deck)
                   (format t "~a asks for a card, and now he has: ~d points~%" (name player) (points player)))))))
@@ -122,15 +127,17 @@ For now, the only strategies are:
   (let* ((number-of-players 3)
          (number-of-decks 6)
          (game (make-game number-of-players number-of-decks))
-         (players (players game)))
+         (players (players game))
+         (dealer (dealer game)))
     (format t "Starting the game. Good luck everyone!~%")
 
     (deal-first-hand game)
     (format t "~%Scores after dealing the first hand:~%")
     (print-players-scores players)
 
-    (format t "~%Dealer's face-up card: ~a~%" (first (hand (dealer game))))
+    (format t "~%Dealer's face-up card: ~a~%" (first (hand dealer)))
     
     (deal-next-hands game)
     (format t "~%Final scores:~%")
+    (format t "~%Dealer's score: ~a~%" (points dealer))
     (print-players-scores players)))

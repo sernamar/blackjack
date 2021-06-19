@@ -11,6 +11,7 @@
            #:make-player
            #:hit
            #:stand
+           #:bust
            ;; game class
            #:players
            #:dealer
