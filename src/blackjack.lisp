@@ -1,5 +1,9 @@
 (in-package #:blackjack)
 
+;;; -------- ;;;
+;;;   Deck   ;;;
+;;; -------- ;;;
+
 (defparameter *52-cards-deck*
   '(11 11 11 11 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10)
   "List of cards in a deck.")
@@ -19,6 +23,10 @@
   "Shuffle a deck."
   (setf (cards deck) (alexandria:shuffle (cards deck)))
   deck)
+
+;;; ---------- ;;;
+;;;   Player   ;;;
+;;; ---------- ;;;
 
 (defclass player ()
   ((name :initarg :name
@@ -46,6 +54,10 @@
     (if (and (member 11 hand) (> sum 21))
         (- sum 10)
         sum)))
+
+;;; -------- ;;;
+;;;   Game   ;;;
+;;; -------- ;;;
 
 (defclass game ()
   ((players :initarg :players
