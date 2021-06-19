@@ -10,6 +10,7 @@
            #:points
            #:make-player
            #:hit
+           #:stand
            ;; game class
            #:players
            #:dealer
