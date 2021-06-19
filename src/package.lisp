@@ -16,4 +16,5 @@
            #:dealer
            #:deck
            #:make-game
-           #:deal-first-hand))
+           #:deal-first-hand
+           #:deal-next-hands))
