@@ -48,14 +48,13 @@
     (setf (points player) (choose-best-score (hand player)))
     card))
 
-(defmethod stand ((player player) (dealer player))
+(defmethod stand ((player player) dealer-face-up-card)
   "Decide if a player should stand or hit again.
 
 For now, the only strategies are:
   - Stand on anything 17 or higher.
   - If the dealer’s card is a four, five or six, do not bust. It is common practice to hit on anything less than 12, and stand otherwise."
-  (let ((points (points player))
-        (dealer-face-up-card (first (hand dealer))))
+  (let ((points (points player)))
     (cond ((<= 17 points) t)
           ((and (member dealer-face-up-card '(4 5 6)) (<= 12 points)) t)
           (t nil))))
