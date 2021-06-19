@@ -12,6 +12,7 @@
            #:hit
            ;; game class
            #:players
+           #:dealer
            #:deck
            #:make-game
            #:deal-first-hand))

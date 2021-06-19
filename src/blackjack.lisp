@@ -63,6 +63,9 @@
   ((players :initarg :players
             :initform nil
             :accessor players)
+   (dealer :initarg :dealer
+           :initform nil
+           :accessor dealer)
    (deck :initarg :deck
          :initform nil
          :accessor deck)))
@@ -71,12 +74,15 @@
   (make-instance 'game
                  :players (loop :for x :from 1 :to number-of-players
                                 :collect (make-player (format nil "player-~a" x)))
+                 :dealer (make-player "dealer")
                  :deck (make-deck number-of-decks)))
 
 (defmethod deal-first-hand ((game game))
   "Deal the first hand (2 cards to each player)."
   (let ((players (players game))
+        (dealer (dealer game))
         (deck (deck game)))
     (dotimes (x 2)
       (dolist (player players)
-        (hit player deck)))))
+        (hit player deck))
+      (hit dealer deck))))
