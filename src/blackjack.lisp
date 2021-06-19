@@ -66,6 +66,11 @@ For now, the only strategies are:
         (- sum 10)
         sum)))
 
+(defun print-players-scores (players)
+  (mapcar (lambda (player)
+              (format t "~a: ~d points~%" (name player) (points player)))
+            players))
+
 ;;; -------- ;;;
 ;;;   Game   ;;;
 ;;; -------- ;;;
@@ -103,14 +108,29 @@ For now, the only strategies are:
          (dealer (dealer game))
          (dealer-face-up-card (first (hand dealer)))
          (deck (deck game)))
-    (format t "Dealer's face-up card: ~a~%" dealer-face-up-card)
-    (format t "~%Players first hand:~%")
-    (mapcar (lambda (player)
-              (format t "~a: ~d points~%" (name player) (points player)))
-            players)
-    (format t "~%Players next hands:~%")
     (dolist (player players)
       (loop :while (not (stand player dealer-face-up-card))
             :do (progn
                   (hit player deck)
-                  (format t "~a: ~d points~%" (name player) (points player)))))))
+                  (format t "~a asks for a card, and now he has: ~d points~%" (name player) (points player)))))))
+
+;;; ----------- ;;;
+;;;   Example   ;;;
+;;; ----------- ;;;
+
+(defun run-example ()
+  (let* ((number-of-players 3)
+         (number-of-decks 6)
+         (game (make-game number-of-players number-of-decks))
+         (players (players game)))
+    (format t "Starting the game. Good luck everyone!~%")
+
+    (deal-first-hand game)
+    (format t "~%Scores after dealing the first hand:~%")
+    (print-players-scores players)
+
+    (format t "~%Dealer's face-up card: ~a~%" (first (hand (dealer game))))
+    
+    (deal-next-hands game)
+    (format t "~%Final scores:~%")
+    (print-players-scores players)))
