@@ -143,11 +143,11 @@ For now, the only strategies are:
     (format t "~%Scores after dealing the first hand:~%")
     (print-players-scores players)
 
-    (format t "~%Dealer's face-up card: ~a~%" (first (hand dealer)))
+    (format t "~%Dealer's face-up card: ~d~%" (first (hand dealer)))
     
     (deal-next-hands game)
     (format t "~%Final scores:~%")
-    (format t "~%Dealer's score: ~a~%" (points dealer))
+    (format t "~%Dealer's score: ~d~%" (points dealer))
     (print-players-scores players)
 
     (format t "~%List of winners:~%")
